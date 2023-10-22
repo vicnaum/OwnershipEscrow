@@ -72,7 +72,7 @@ contract Escrow {
      */
     function _finalizeEscrow(address newOwner) internal {
         bytes32[] memory params = escrowParams.transferOwnershipFunctionParams;
-        params[escrowParams.newOwnerIndex] = bytes32(abi.encodePacked(newOwner));
+        params[escrowParams.newOwnerIndex] = bytes32(uint256(uint160(newOwner)));
 
         (bool success,) = escrowParams.escrowedContract.call(
             abi.encodePacked(escrowParams.transferOwnershipFunctionSignature, params)
